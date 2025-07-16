@@ -44,14 +44,15 @@ def main():
     access_key_id = get_env_var('ALIYUN_ACCESS_KEY_ID')
     access_key_secret = get_env_var('ALIYUN_ACCESS_KEY_SECRET')
     domains = get_env_var('DOMAINS').split(',')
-    cdn_domains = get_env_var('ALIYUN_CDN_DOMAINS').split(',')
+    # cdn_domains = get_env_var('ALIYUN_CDN_DOMAINS').split(',')
 
     client = AcsClient(access_key_id, access_key_secret, 'cn-hangzhou')
 
-    for domain, cdn_domain in zip(domains, cdn_domains):
+    # for domain, cdn_domain in zip(domains, cdn_domains):
+    for domain in domains:
         cert_path = f'~/certs/{domain}/fullchain.pem'
         key_path = f'~/certs/{domain}/privkey.pem'
-        upload_certificate(client, cdn_domain, cert_path, key_path)
+        upload_certificate(client, domain, cert_path, key_path)
 
 if __name__ == "__main__":
     main()
